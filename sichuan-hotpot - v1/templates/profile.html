@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+
+<div class="card text-center">
+        <div class="card-header">
+          Profile
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Hello {{user.get_name()}}</h5>
+          <p class="card-text">
+                Username: {{user.get_name()}}
+          </p>
+        <p class="card-text">
+                E-mail address: {{user.get_email()}}
+        </p>
+        <p class="card-text">
+                Your are: {{user.get_user_type()}}
+        </p>
+          
+
+          <a href="{{url_for('dashboard')}}" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+{% endblock %}

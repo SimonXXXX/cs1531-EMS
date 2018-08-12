@@ -1,0 +1,166 @@
+{%extends 'base.html' %}
+{% block body %}
+
+<blockquote class="blockquote text-center">
+<p class="mb-0">Post a Seminar:</p>
+<footer class="blockquote-footer">I don't know her either.<cite title="Source Title">Mariah Carey</cite></footer>
+</blockquote>
+<!-- 
+<div>
+    <form method = 'POST'>
+            name:<input type="text" name = "name">
+            <br/>
+            capacity:<input type="number" name = "capacity">
+            <br/>
+            location:<input type="text" name = "location">
+            <br/>
+            description:<input type ="text" name = "description">
+            <br/>
+            start_time:<input type='date' name = "start_time">
+            <br/>
+            finish_time:<input type='date' name = "finish_time">
+            <br/>
+            de_register_time:<input type='date' name = "de_register_time">
+            <br/>
+            early_bird_finish_time:<input type='date' name = "eb_finishTime">
+            <br/>
+            Register fee:<input type='number' name = "fee">
+            <br/>
+        <button name="Post_course" type="submit">Post This Course</button>
+    </form>
+</div> -->
+
+
+<div class = "container">
+
+{% if errors and 'sf_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['sf_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+
+
+{% if errors and 'dr_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['dr_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'eb_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['eb_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'name_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['name_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'capacity_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['capacity_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'location_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['location_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'start_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['start_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'finish_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['finish_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'early_bird_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['early_bird_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+{% if errors and 'deregister_error' in errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ errors['deregister_error'] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+</div>
+{% endif %}
+
+
+
+
+
+<form method = 'POST'>
+        <div class="form-group">
+          <label>Name:</label>
+          <input name = "name" class="form-control" type="text" placeholder="Course Name">
+        </div>
+
+        <div class="form-group">
+                        <label>Capacity:</label>
+                        <input name = "capacity" class="form-control" type="number" placeholder="Capacity">
+        </div>
+
+        <div class="form-group">
+                        <label>Location:</label>
+                        <input name = "location" class="form-control" type="text" placeholder="Location">
+        </div>
+        <div class="form-group">
+                        <label>Description:</label>
+                        <input name = "description" class="form-control" type="text" placeholder="Description">
+        </div>
+        <div class="form-group">
+                        <label>Start Time:</label>
+                        <input name = "start_time" class="form-control" type="date" placeholder="Start Time">
+        </div>
+        <div class="form-group">
+                        <label>End Time:</label>
+                        <input name = "finish_time" class="form-control" type="date" placeholder="End Time">
+        </div>
+        <div class="form-group">
+                        <label>Dereg Period:</label>
+                        <input name = "de_register_time" class="form-control" type="date" placeholder="Period">
+        </div>
+        <div class="form-group">
+                        <label>Early Period:</label>
+                        <input name = "eb_finishTime" class="form-control" type="date" placeholder="Period">
+        </div>
+        <div class="form-group">
+                        <label>Fee:</label>
+                        <input name = "fee" class="form-control" type="number" placeholder="Fee">
+        </div>
+        <button name="Post_course" type="submit" class="btn btn-primary mb-2">Post This Course</button>
+</form>
+</div>
+
+{% endblock %}

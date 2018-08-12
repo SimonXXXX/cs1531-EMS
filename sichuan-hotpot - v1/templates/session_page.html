@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+
+<blockquote class="blockquote text-center">
+<p class="mb-0">Session Deetz:</p>
+<footer class="blockquote-footer">Can you?<cite title="Source Title">Mariah Carey</cite></footer>
+</blockquote>       
+
+
+
+
+<div class="card">
+<h5 class="card-header">Featured</h5>
+<div class="card-body">
+        <h5 class="card-title">Session</h5>
+        <p class="card-text">
+
+<h3>
+                Session_name: {{Session.get_name()}}<br/>
+                Session_speaker: {{Session.get_speaker()}}<br/>
+                Speaker_type: {{Session.get_speaker_type()}}<br/>
+                {{Session.get_capacity() - Session.get_num_of_attendees()}} seats are left for this Session <br/>
+            </h3>
+            {% if (Session.get_capacity() - Session.get_num_of_attendees()) == 0 %}
+                    <br/>
+                    <font size = "6" color = "red">
+                            This Session is already full!
+                    </font>
+                    <br/>
+            {% endif %}
+            <form method = "POST">
+                    <div {% if register_available == "unable" %} hidden {% endif %}>
+                    Register:<input type = "submit" name = "Register" value = "Register"/>
+                    </div>
+                    <div {% if de_register_available == "unable" %} hidden {% endif %}>
+                    De-Register:<input type = "submit" name = "De-Register" value = "De-Register"/>
+                    </div>
+            </form>
+            
+            <a href="{{ url_for('seminar_page', id = Seminar.get_id()) }}">
+                    <button>Back</button>
+            </a>
+            
+            {% if errors and 'E' in errors %}
+                    <font size="3" color="red">{{ errors['E'] }}</font><br>
+            
+            </div>
+            
+            {% endif %}
+                
+        </p>
+        
+</div>
+</div>
+
+
+
+
+{% endblock %}
