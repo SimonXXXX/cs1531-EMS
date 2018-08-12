@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<blockquote class="blockquote text-center">
+<p class="mb-0">Seminar Deetz:</p>
+<footer class="blockquote-footer">I don't really know her <cite title="Source Title">Mariah Carey</cite></footer>
+</blockquote>
+
+<!-- <h5>
+        Event_id: #{{Seminar.get_id()}}<br/>
+        Name: {{Seminar.get_name()}}<br/>
+        Capacity: {{Seminar.get_capacity()}}<br/>
+        Location: {{Seminar.get_location()}}<br/>
+        Start_Time: {{Seminar.get_startTime()}}<br/>
+        Finish_Time: {{Seminar.get_finishTime()}}<br/>
+        {{Seminar.get_capacity() - Seminar.get_attendees_num()}} seats are left for this Seminar <br/>
+        You can de-registered before: {{Seminar.get_de_registerTime()}}<br/>
+        You can register for early_bird registration before: {{Seminar.get_earlybird_finishTime()}}<br/>
+        {% if current_user.get_user_type() == "guest" and guest_speaker_free == "unable"%}
+        Register fee: ${{Seminar.get_register_fee()}}
+        <h4>*You can get 50% free if you register Early_Bird_registeration.</h4>
+        {% else %}
+        Register fee: Free
+        {% endif %}
+</h5> -->
+
+
+<div class="container">
+
+<div class="card">
+<div class="card-header">
+        Session List:
+</div>
+<div class="card-body">
+        <h5 class="card-title">Detail
+        </h5>   
+        <p class="card-text">
+        Event_id: #{{Seminar.get_id()}}<br/>
+        Name: {{Seminar.get_name()}}<br/>
+        Capacity: {{Seminar.get_capacity()}}<br/>
+        Location: {{Seminar.get_location()}}<br/>
+        Start_Time: {{Seminar.get_startTime()}}<br/>
+        Finish_Time: {{Seminar.get_finishTime()}}<br/>
+        {{Seminar.get_capacity() - Seminar.get_attendees_num()}} seats are left for this Seminar <br/>
+        You can de-registered before: {{Seminar.get_de_registerTime()}}<br/>
+        You can register for early_bird registration before: {{Seminar.get_earlybird_finishTime()}}<br/>
+        {% if current_user.get_user_type() == "guest" and guest_speaker_free == "unable"%}
+        Register fee: ${{Seminar.get_register_fee()}}
+        <h4 class="card-title">You can get 50% free if you register Early_Bird_registeration.</h4>
+        {% else %}
+        Register fee: Free
+        {% endif %}
+        </p>
+
+        
+        <h5 class="card-title">Session List:
+        </h5>  
+        <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        </p>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        </p> -->
+
+{% if Seminar.get_capacity() - Seminar.get_attendees_num() == 0 %}
+<br/>
+<font size = "6" color = "red">
+        This Event is already full!
+</font>
+<br/>
+{% endif %}
+
+<h4>
+{% for session in session_list %}
+
+<a href="{{ url_for('session_page',session_id = session.get_id(),seminar_id = Seminar.get_id())}}">
+                Name: {{session.get_name()}}<br>
+                Speaker: {{session.get_speaker()}}<br/><br/>
+<a/>
+{% endfor %}
+</h4>
+
+
+<form method = "POST">
+
+{% if current_user.get_user_type() == "guest" and guest_speaker_free == "unable"%}
+        {% if RAS == "unable" %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+                Register for Early_Bird Registeration (${{Seminar.get_sale_register_fee()}}) :<input type = "submit" name = "eb" value = "Register" disabled="disabled"/>
+                *You need to register at least one session
+        </div>
+                                            
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+                Register (${{Seminar.get_register_fee()}}) :<input type = "submit" name = "Register" vallue = "Register" disabled="disabled" />
+                *You need to register at least one session
+        </div>
+        {% else %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+                Register for Early_Bird Registeration (${{Seminar.get_sale_register_fee()}}) :<input type = "submit" name = "eb" value = "Register"/>
+        </div>
+                            
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+                Register (${{Seminar.get_register_fee()}}) :<input type = "submit" name = "Register" vallue = "Register"/>
+        </div>
+        {% endif %}
+{% else %}
+        {% if RAS == "unable" %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+                Register for Early_Bird Registeration (Free) :<input type = "submit" name = "eb" value = "Register" disabled="disabled"/>
+                *You need to register at least one session
+        </div>
+                                    
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+                Register (Free) :<input type = "submit" name = "Register" vallue = "Register" disabled="disabled"/>
+                *You need to register at least one session
+        </div>
+        {% else %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+                 Register for Early_Bird Registeration (Free) :<input type = "submit" name = "eb" value = "Register"/>
+        </div>
+                
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+                Register (Free) :<input type = "submit" name = "Register" vallue = "Register"/>
+        </div>
+        {% endif %}
+{% endif %}
+
+<div {%if d_r_available == "unable" %}hidden{% endif %}>
+De-Register:<input type = "submit" name = "De-Register" value = "De-Register"/>
+</div>
+
+{% if errors %}
+<font size="4" color="red">{{ errors }}</font><br>  
+{% endif %}
+
+<div {%if c_available == "unable" %}hidden{% endif %}>
+    <h2>
+            Staff Option: <br/>
+    </h2>
+    <h4>
+            Register fee for guest: ${{Seminar.get_register_fee()}}
+    </h4>
+    Cancel:<input type = "submit" name = "Cancel" value = "Cancel"/>
+</div>
+<div {%if n_s_available == "unable" %}hidden{% endif %}>
+Add_session:<input type = "submit" name = "Add_session" value = "Add"/>
+</div>
+<div {%if c_available == "unable" %}hidden{% endif %}>
+    Show all attendees:<input type = "submit" name = "Show" value = "Show"/>
+</div>
+</form>
+
+
+
+{{detail}}
+</div>
+</div>
+
+
+
+
+</div>
+{% endblock %}

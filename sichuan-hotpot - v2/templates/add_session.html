@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<br/>
+<div>
+  <h2>Add Session</h2>
+</div>
+<div>
+<form method="POST">
+    Session Name:<input type = "text" name="name"><br/>
+    Session Speaker:<input type = "text" name="speaker"><br/>
+    Session Speaker-type:<input type = "text" list = "speaker_type" name = "speaker_type"><br/>
+        <datalist id = "speaker_type">
+            <option>UNSW academic speaker</option>
+            <option>Non-UNSW guest-speaker</option>
+        </datalist>
+    Session capacity: <input type = "number" name="capacity"><br/>
+<button name="add_session" type="submit">Add_This_Session</button>
+</form>
+{{Notice}}
+</div>
+
+{% if errors and 'sn_error' in errors %}
+        <font size="3" color="red">{{ errors['sn_error'] }}</font><br>
+{% endif %}
+{% if errors and 'sp_error' in errors %}
+        <font size="3" color="red">{{ errors['sp_error'] }}</font><br>
+{% endif %}
+{% if errors and 'type_error' in errors %}
+        <font size="3" color="red">{{ errors['type_error'] }}</font><br>
+{% endif %}
+{% if errors and 'capacity_error' in errors %}
+        <font size="3" color="red">{{ errors['capacity_error'] }}</font><br>
+{% endif %}
+{% if errors and 'guest_speaker' in errors %}
+        <font size="3" color="red">{{ errors['guest_speaker'] }}</font><br>
+{% endif %}
+{% if errors and 'capacity_num' in errors %}
+        <font size="3" color="red">{{ errors['capacity_num'] }}</font><br>
+{% endif %}
+{% if errors and 'no_seat' in errors %}
+        <font size="3" color="red">{{ errors['no_seat'] }}</font><br>
+{% endif %}
+{% endblock %}

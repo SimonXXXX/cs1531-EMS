@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>
+    All_Attendees: 
+</h1>
+
+{% for uuser in Event.get_all_attendees() %}
+<h3>
+    *{{uuser}}*<br/>
+</h3>
+{% endfor %}
+
+
+{% if Event.get_event_type() == "SEMINAR" %}
+<a href="{{ url_for('seminar_page', id = Event.get_id()) }}">
+    <button>Back</button>
+</a>
+{% else %}
+<a href="{{ url_for('course_page', id = Event.get_id()) }}">
+        <button>Back</button>
+</a>
+{% endif %}
+{% endblock %}

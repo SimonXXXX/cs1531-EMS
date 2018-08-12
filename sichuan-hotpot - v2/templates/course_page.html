@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Course Detail:</h2>
+
+<h3>
+    Event_id: #{{Course.get_id()}}<br/>
+    Name: {{Course.get_name()}}<br/>
+    Capacity: {{Course.get_capacity()}}<br/>
+    Location: {{Course.get_location()}}<br/>
+    Start_Time: {{Course.get_startTime()}}<br/>
+    Finish_Time: {{Course.get_finishTime()}}<br/>
+    {{Course.get_capacity() - Course.get_attendees_num()}} seats are left for this Seminar <br/>
+    De_RegisterTime: Can de-registered before {{Course.get_de_registerTime()}}<br/>
+    Can register for early_bird registration before: {{Course.get_earlybird_finishTime()}}<br/>
+    {% if current_user.get_user_type() == "guest" %}
+    Register fee: ${{Course.get_register_fee()}}<br/>
+    <h4>*You can get 50% free if you register Early_Bird_registeration.</h4>
+    {% else %}
+    Register fee: Free
+    {% endif %}
+</h3>
+{% if (Course.get_capacity() - Course.get_attendees_num()) == 0 %}
+        <br/>
+        <font size = "6" color = "red">
+                This Event is already full!
+        </font>
+        <br/>
+{% endif %}
+
+
+
+<form method = "POST">
+        {% if current_user.get_user_type() == "guest" %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+                Register for Early_Bird Registeration (${{Course.get_sale_register_fee()}}) :<input type = "submit" name = "eb" value = "Register"/>
+        </div>
+                                    
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+                Register (${{Course.get_register_fee()}}) :<input type = "submit" name = "Register" vallue = "Register"/>
+        </div>
+        {% else %}
+        <div {%if register_eb == "unable" %}hidden{% endif %}>
+            Register for Early_Bird Registeration (Free) :<input type = "submit" name = "eb" value = "Register"/>
+        </div>
+                        
+        <div {%if r_available == "unable" %}hidden{% endif %}>
+            Register (Free) :<input type = "submit" name = "Register" vallue = "Register"/>
+        </div>
+        {% endif %}
+    <div {%if d_r_available == "unable" %}hidden{% endif %}>
+            De-Register:<input type = "submit" name = "De-Register" vallue = "De-Register"/>
+    </div>
+
+    {% if errors %}
+    <font size="4" color="red">{{ errors }}</font><br>  
+    {% endif %}
+
+    <div {%if c_available == "unable" %}hidden{% endif %}>
+            <h2>
+                    Staff Option: <br/>
+            </h2>
+            <h4>
+                    Register fee for guest: ${{Course.get_register_fee()}}
+            </h4>
+            Cancel:<input type = "submit" name = "Cancel" vallue = "Cancel"/>
+    </div>
+    
+    <div {%if c_available == "unable" %}hidden{% endif %}>
+                Show all attendees:<input type = "submit" name = "Show" vallue = "Show"/>
+    </div>
+</form>
+
+{{detail}}
+{% endblock %}

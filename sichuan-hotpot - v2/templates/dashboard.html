@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% block body %}
+<h4 class ="text-center">
+    Welcome, {{current_user.get_name()}}
+</h4>
+{% if current_user.get_message() != "" %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Notification:</strong> {{current_user.get_message()}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+{% endif %}
+
+
+
+<blockquote class="blockquote text-center">
+    <p class="mb-0">All Openning Event:</p>
+    <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+</blockquote>
+<div class="card-columns" >
+
+    {% for Event in all_opening_event %}
+    {% if Event.get_event_type() == "SEMINAR" %}
+    <!-- <h3>Seminar *{{Event.get_capacity() - Event.get_attendees_num()}} seats are left for this Seminar</h3>
+        <a href="{{url_for('seminar_page',id = Event.get_id())}}">
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+        </a>
+     -->
+     <div class="card">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('seminar_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+
+
+    {% else %}
+    <!-- <li><h3>Course *{{Event.get_capacity() - Event.get_attendees_num()}} seats are left for this Course</h3>
+        <a href="{{url_for('course_page',id = Event.get_id())}}">
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+        </a>
+    </li> -->
+    <div class="card">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('course_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<blockquote class="blockquote text-center">
+    <p class="mb-0">All Closed Event:</p>
+    <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+</blockquote>
+<div class="card-columns" >
+
+<!-- <ul>
+    {% for Event in all_closed_event %}
+    {% if Event.get_event_type() == "SEMINAR" %}
+    <li><h3>Seminar *{{Event.get_capacity() - Event.get_attendees_num()}} seats are left for this Seminar</h3>
+        <a href="{{url_for('seminar_page',id = Event.get_id())}}">
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+        </a>
+    </li>
+    {% else %}
+    <li><h3>Course *{{Event.get_capacity() - Event.get_attendees_num()}} seats are left for this Course</h3>
+        <a href="{{url_for('course_page',id = Event.get_id())}}">
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+        </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul> -->
+
+{% for Event in all_closed_event %}
+    {% if Event.get_event_type() == "SEMINAR" %}
+     <div class="card  mb-3">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('seminar_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+
+    {% else %}
+
+    <div class="card mb-3" >
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('course_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+
+<blockquote class="blockquote text-center">
+    <p class="mb-0">Current Registered Event:</p>
+    <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+</blockquote>
+<div class="card-columns"> 
+
+{% for Event in curr_register_event %}
+    {% if Event.get_event_type() == "SEMINAR" %}
+
+     <div class="card  mb-3">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('seminar_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+</div>
+
+
+    {% else %}
+    <div class="card mb-3">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('course_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+{% endif %}
+{% endfor %}
+
+</div>
+
+<blockquote class="blockquote text-center">
+    <p class="mb-0">Pass Registered Event:</p>
+    <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+</blockquote>
+
+<div class="card-columns">
+
+{% for Event in pass_register_event %}
+    {% if Event.get_event_type() == "SEMINAR" %}
+
+     <div class="card  mb-3">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('seminar_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+</div>
+
+
+    {% else %}
+    <div class="card mb-3">
+            <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+            <div class="card-body">
+            <h5 class="card-title">{{Event.get_name()}}
+            <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+            </h5>
+            <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+            <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+            <a class="btn btn-primary" href="{{url_for('course_page',id = Event.get_id())}}" role="button">
+            Register
+            <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+            <span class="sr-only">status</span>
+            </a>
+            </div>
+            <div class="card-footer">
+                    Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+            </div>
+     </div>
+{% endif %}
+{% endfor %}
+</div>
+
+
+<br/>
+<div {% if trainer != 1 %}hidden{% endif %}>
+    <form>
+        <h4 class ="text-center">
+            Staff Dashboard
+        </h4>
+
+        <blockquote class="blockquote text-center">
+            <p class="mb-0"> Opening Posted Events:</p>
+            <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+        </blockquote>
+        <div class="card-columns"> 
+                {% for Event in opening_posted_event %}
+                {% if Event.get_event_type() == "SEMINAR" %}
+                <!-- <li><h3>Seminar</h3>
+                    <a href="{{url_for('seminar_page',id = Event.get_id())}}">
+                        Name: {{Event.get_name()}}<br/>
+                        Start-Time: {{Event.get_startTime()}}<br>
+                        Finish-Time: {{Event.get_finishTime()}}<br>
+                    </a>
+                </li> -->
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{Event.get_name()}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+                      </h6>
+                      <p class="card-text">{{Event.get_description()}}</p>
+                      <h6 class="card-subtitle mb-2 text-muted">Start: {{Event.get_startTime()}} To: {{Event.get_finishTime()}} </h6>
+                      <a href="{{url_for('seminar_page',id = Event.get_id())}}" class="card-link">Card link</a>
+                      
+                    </div>
+                  </div>
+
+                {% else %}
+                <!-- <li><h3>Course</h3>
+                    <a href="{{url_for('course_page',id = Event.get_id())}}">
+                        Name: {{Event.get_name()}}<br/>
+                        Start-Time: {{Event.get_startTime()}}<br/>
+                        Finish-Time: {{Event.get_finishTime()}}<br/>
+                    </a>
+                </li> -->
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{Event.get_name()}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+                      </h6>
+                      <p class="card-text">{{Event.get_description()}}</p>
+                      <h6 class="card-subtitle mb-2 text-muted">Start: {{Event.get_startTime()}} To: {{Event.get_finishTime()}} </h6>
+                      <a href="{{url_for('course_page',id = Event.get_id())}}" class="card-link">Card link</a>
+                      
+                    </div>
+                  </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            
+        <blockquote class="blockquote text-center">
+            <p class="mb-0"> Closed Posted Events:</p>
+            <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+        </blockquote>
+        
+            <div class="card-columns"> 
+                {% for Event in closed_posted_event %}
+                {% if Event.get_event_type() == "SEMINAR" %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{Event.get_name()}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+                      </h6>
+                      <p class="card-text">{{Event.get_description()}}</p>
+                      <h6 class="card-subtitle mb-2 text-muted">Start: {{Event.get_startTime()}} To: {{Event.get_finishTime()}} </h6>
+                      <a href="{{url_for('seminar_page',id = Event.get_id())}}" class="card-link">Card link</a>
+                      
+                    </div>
+                  </div>
+
+                {% else %}
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{Event.get_name()}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+                      </h6>
+                      <p class="card-text">{{Event.get_description()}}</p>
+                      <h6 class="card-subtitle mb-2 text-muted">Start: {{Event.get_startTime()}} To: {{Event.get_finishTime()}} </h6>
+                      <a href="{{url_for('course_page',id = Event.get_id())}}" class="card-link">Card link</a>
+                      
+                    </div>
+                  </div>
+           
+                {% endif %}
+                {% endfor %}
+            </div>
+
+
+
+        <blockquote class="blockquote text-center">
+            <p class="mb-0"> Cancelled Event:</p>
+            <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+        </blockquote>
+        <div class="card-columns"> 
+                {% for Event in cancelled_posted_event %}
+                {% if Event.get_event_type() == "SEMINAR" %}
+              
+     <div class="card  mb-3">
+        <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+        <div class="card-body">
+        <h5 class="card-title">{{Event.get_name()}}
+        <span class="badge badge-warning">{{Event.__class__.__name__}}</span>
+        </h5>
+        <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+        <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+        <a class="btn btn-primary" href="{{url_for('seminar_page',id = Event.get_id())}}" role="button">
+        Register
+        <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+        <span class="sr-only">status</span>
+        </a>
+        </div>
+        <div class="card-footer">
+                Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+        </div>
+</div>
+
+
+{% else %}
+<div class="card mb-3">
+        <img class="card-img-top" src="http://ladyandpups.com/wp-content/uploads/2014/11/mala-hot-pot27.jpg" alt="hotpot">
+        <div class="card-body">
+        <h5 class="card-title">{{Event.get_name()}}
+        <span class="badge badge-success">{{Event.__class__.__name__}}</span>
+        </h5>
+        <span class="badge badge-light">Seats Left: {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+
+        <p class="card-text" style = "margin-top: 5px">{{Event.get_description()}}</p>
+        <a class="btn btn-primary" href="{{url_for('course_page',id = Event.get_id())}}" role="button">
+        Register
+        <span class="badge badge-light"> {{Event.get_capacity() - Event.get_attendees_num()}}</span>
+        <span class="sr-only">status</span>
+        </a>
+        </div>
+        <div class="card-footer">
+                Start: {{Event.get_startTime()}} To : {{Event.get_finishTime()}}
+        </div>
+ </div>
+                {% endif %}
+                {% endfor %}
+        </div>        
+    </form>
+
+    <blockquote class="blockquote text-center">
+            <p class="mb-0">
+                    <a class="btn btn-primary" href="{{url_for('post_course')}}" role="button">Post Course</a>
+                    <a class="btn btn-primary" href="{{url_for('post_seminar')}}" role="button">Post Seminar</a>
+            </p>
+    </blockquote>
+
+</div>
+{% endblock %}

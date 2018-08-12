@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>
+    All Event
+</h1>
+<ul>
+        {% for Event in all_opening_event %}
+        {% if Event.get_event_type() == "SEMINAR" %}
+        <li><h3>Seminar</h3>
+            <a href="{{url_for('seminar_page',id = Event.get_id())}}">
+            <br/>
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+            </a>
+        </li>
+        {% else %}
+        <li><h3>Course</h3>
+            <a href="{{url_for('course_page',id = Event.get_id())}}">
+            <br/>
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+</ul>
+<ul>
+        {% for Event in all_closed_event %}
+        {% if Event.get_event_type() == "SEMINAR" %}
+        <li><h3>Seminar</h3>
+            <a href="{{url_for('seminar_page',id = Event.get_id())}}">
+            <br/>
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+            </a>
+        </li>
+        {% else %}
+        <li><h3>Course</h3>
+            <a href="{{url_for('course_page',id = Event.get_id())}}">
+            <br/>
+            Name: {{Event.get_name()}}<br/>
+            Start-Time: {{Event.get_startTime()}}<br/>
+            Finish-Time: {{Event.get_finishTime()}}<br/>
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+</ul>
+
+{% endblock %}

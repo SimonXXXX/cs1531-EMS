@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event Magement System!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    body,html{
+        height:100%;
+        margin: 0px;
+        border: 0px;
+    }
+
+    
+    @media (min-width:576px) {
+    .card-columns {
+      column-count: 3;
+    }
+    }
+    @media (min-width:768px) {
+    .card-columns {
+        column-count: 3;
+    }
+    }
+    @media (min-width:992px) {
+    .card-columns {
+        column-count: 3;
+    }
+    }
+    @media (min-width:1200px) {
+    .card-columns {
+        column-count: 3;
+    }
+    }
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light"   style="background-color: rgba(60, 225, 236, 0.185);">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('show_all_event') }}">All Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+       
+        <a class="mx-auto" href="#">
+            <img src="/static/image/cooking-pot.png" class="" style = "  max-height:50px; max-width:50px; height:auto; width:auto;" >
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            {% if current_user.is_anonymous %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('Guest_Register') }}">Guest Register</a>
+            </li>
+            {%endif%}
+            {% if current_user.is_anonymous == false %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            {%endif%}
+        </ul>
+    </div>
+</nav>
+          
+    
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<form method = "post">
+    <h2>
+        <p style="text-align: center">
+            E-mail Address: <input type = "text" name = "Email"><br/>
+            Username: <input type = "text" name = "Username"><br/>
+            Password: <input type = "text" name = "Password"><br/>
+            <button>Confirm</button>
+        </p>
+    </h2>
+</form>
+<h1 style="text-align: center">
+        {{message}}
+</h1>
+{% if errors and 'name_error' in errors %}
+        <font size="3" color="red" style="text-align: center">{{ errors['name_error'] }}</font><br>
+{% endif %}
+{% if errors and 'password_error' in errors %}
+        <font size="3" color="red" style="text-align: center">{{ errors['password_error'] }}</font><br>
+{% endif %}
+{% if errors and 'mail_error' in errors %}
+        <font size="3" color="red" style="text-align: center">{{ errors['mail_error'] }}</font><br>
+{% endif %}
+{% if errors and 'address_error' in errors %}
+        <font size="3" color="red" style="text-align: center">{{ errors['address_error'] }}</font><br>
+{% endif %}
+{% if errors and 'username_blank' in errors %}
+        <font size="3" color="red" style="text-align: center">{{ errors['username_blank'] }}</font><br>
+{% endif %}
+{% endblock %}
